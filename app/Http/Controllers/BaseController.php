@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 abstract class BaseController extends Controller
 {
     /**
-     * success response method.
+     * success and error response method.
      *
      * @return \Illuminate\Http\Response
      */
