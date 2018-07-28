@@ -11,7 +11,7 @@ abstract class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message, $code)
+    public function sendResponse($result, $code, $message)
     {
         $response = [
             'data'          => $result,
