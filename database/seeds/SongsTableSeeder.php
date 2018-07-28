@@ -12,11 +12,10 @@ class SongsTableSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 10; $i++) {
-            
             DB::table('songs')->insert([
-                'name' => 'example sounds'.$i+1,
-                'source' => 'https://www.sample-videos.com/audio/mp3/crowd-cheering.mp3',                
-                'category_id' => rand(1,3),
+                'name' => 'example sounds'.$i,
+                'source' => 'https://www.sample-videos.com/audio/mp3/crowd-cheering.mp3',
+                'category_id' => rand(1, 3),
             ]);
         }
     }
