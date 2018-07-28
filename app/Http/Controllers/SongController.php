@@ -10,10 +10,10 @@ class SongController extends BaseController
     public function index()
     {
         try {
-            $song = Song::all();
-            $this->sendResponse($song, 200, null);
+            $song = Song::with('category')->get();
+            return $this->sendResponse($song, 200, null);
         } catch (\Exception $e) {
-            $this->sendResponse(null, 500, $e->getMessage());
+            return $this->sendResponse(null, 500, $e->getMessage());
         }
     }
 }
