@@ -18,9 +18,6 @@ class AuthApiTest extends TestCase
      */
     public function test_should_success_auth_test()
     {
-        
-        // create password grant client
-        // https://laravel.com/docs/5.4/passport#password-grant-tokens
         $this->artisan('passport:client', ['--password' => null, '--no-interaction' => true]);
 
         // create user
