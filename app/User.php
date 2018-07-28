@@ -35,7 +35,27 @@ class User extends Authenticatable
      */
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'user_id', 'song_id');
+        return $this->belongsToMany(Song::class, 'favorites', 'user_id', 'song_id')->withPivot('volume', 'is_playing');    
+    }
+
+
+    /**
+     * addFavorite adds the user's favorite song
+     */
+    public function addFavorite($song_id)
+    {
+        if (!$this->favorites->contains($song_id)) {
+            $this->favorites()->attach($song_id);
+        }
     }
     
+    /**
+     * removeFavorite removes the user's favorite song
+     */
+    public function removeFavorite($song_id)
+    {
+        if (!$this->favorites->contains($song_id)) {
+            $this->favorites()->detach($song_id);
+        }
+    }
 }
