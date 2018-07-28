@@ -18,7 +18,7 @@ class CreateFavoritesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('song_id')->unsigned()->index();
-            $table->integer('volume');
+            $table->integer('volume')->default(0);
             $table->boolean('is_playing')->default(false);
         });
         
