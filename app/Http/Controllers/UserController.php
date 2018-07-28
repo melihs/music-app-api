@@ -4,47 +4,92 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController
 {
     public function index()
     {
         try {
-            $user = User::with('favorites')->get();
-            $this->sendResponse($user, 200, null);
+            $user = User::all();
+            return $this->sendResponse($user, 201, null);
         } catch (\Exception $e) {
-            $this->sendResponse(null, 500, $e->getMessage());
+            return $this->sendResponse(null, 500, $e->getMessage());
         }
     }
 
-    public function addFavorite($id)
+    public function addFavorite($song_id)
     {
-        $user = User::find($id)->favorite()->first();
-
-        $user_id = request()->get('user_id');
-
-        if (empty($user) || (!isset($user_id) or empty($user_id))) {
-            return $this->sendResponse(null, 400, 'Empty query !');
+        try {
+            $user = Auth::user()->addFavorite($song_id);
+            return $this->sendResponse(null, 201, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 500, $e->getMessage());
         }
-
-        $user->addFavorite($user_id);
-
-        return $this->sendResponse($user->load('favorites'), 200, null);
     }
 
    
     public function removeFavorite($id)
     {
-        $user = User::find($id)->favorite()->first();
-        
-        $user_id = request()->get('user_id');
-
-        if (empty($user) || (isset($user_id) or empty($user_id))) {
-            return $this->sendResponse(null, 400, 'Empty query !');
+        try {
+            $user = Auth::user()->removeDirectory($song_id);
+            return $this->sendResponse(null, 200, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 200, null);
         }
+    }
 
-        $user->removeDirectory($user_id);
-        
-        return $this->sendResponse($user->load('favorites'), 200, null);
+    public function getFavorites()
+    {
+        try {
+            $favorites = Auth::user()->with('favorites')->get();
+            return $this->sendResponse($favorites, 200, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 500, $e->getMessage());
+        }
+    }
+
+    public function playSong($song_id)
+    {
+        try {
+            Auth::user()->favorites()->update(['is_playing' => false]);
+            $favorites = Auth::user()->favorites()
+            ->where('song_id', $song_id)
+            ->first()
+            ->pivot
+            ->update(['is_playing' => true]);
+
+            return $this->sendResponse($favorites, 201, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 500, $e->getMessage());
+        }
+    }
+
+    public function pauseSong($song_id)
+    {
+        try {
+            
+            $favorites = Auth::user()->favorites()
+            ->where('song_id', $song_id)
+            ->first()
+            ->pivot
+            ->update(['is_playing' => false]);
+            
+            return $this->sendResponse($favorites, 200, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 500, $e->getMessage());
+        }
+    }
+
+    public function sendVolume($song_id)
+    {
+        try {
+            $volume = request()->has('volume') ? request()->get('volume') : 0;
+            Auth::user()->favorites()->detach($song_id);
+            $favorites = Auth::user()->favorites()->attach($song_id, ['volume' => $volume]);
+            return $this->sendResponse(null, 201, null);
+        } catch (\Exception $e) {
+            return $this->sendResponse(null, 500, $e->getMessage());
+        }
     }
 }

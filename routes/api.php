@@ -18,8 +18,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('signup', 'AuthController@signup');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-
+Route::group(['middleware' => ['auth:api']], function () {
+    
     /*
     |--------------------------------------------------------------------------
     | Authenticate User Route
@@ -39,13 +39,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     /*
     |--------------------------------------------------------------------------
-    | User Favorites routes
+    | User Favorites routes and songs processes
     |--------------------------------------------------------------------------
-    | Endpoint: favorite/{song_id}/add
-    | Endpoint: favorite/{song_id}/remove
+    | Endpoint: /api/favorites
+    | Endpoint: /api/favorite/{song_id}/add
+    | Endpoint: /api/favorite/{song_id}/remove
+    | Endpoint: /api/songs/{song_id}/play
+    | Endpoint: /api/songs/{song_id}/pause
+    | Endpoint: /api/songs/{song_id}/volume
     */
+    Route::get('favorites', 'UserController@getFavorites');
     Route::post('favorite/{song_id}/add', 'UserController@addFavorite');
     Route::post('favorite/{song_id}/remove', 'UserController@removeFavorite');
+    Route::post('songs/{song_id}/play', 'UserController@playSong');
+    Route::post('songs/{song_id}/pause', 'UserController@pauseSong');
+    Route::post('songs/{song_id}/volume', 'UserController@sendVolume');
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +62,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     |--------------------------------------------------------------------------
     | Endpoint: /api/categories
     */
-    Route::resource('categories', 'Categoriescontroller');
+    Route::resource('categories', 'CategoryController');
 
     /*
     |--------------------------------------------------------------------------
@@ -61,5 +70,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     |--------------------------------------------------------------------------
     | Endpoint: /api/songs
     */
-    Route::resource('songs', 'SongsController');
+    Route::resource('songs', 'SongController');
 });
