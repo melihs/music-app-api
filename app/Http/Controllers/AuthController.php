@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     /**
      * Create user
@@ -32,9 +32,7 @@ class AuthController extends Controller
         ]);
         $user->save();
 
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        $this->sendResponse(null, 201, null);
     }
   
     /**
@@ -55,11 +53,11 @@ class AuthController extends Controller
             'remember_me' => 'boolean'
         ]);
         $credentials = request(['email', 'password']);
+        
         if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            return $this->sendResponse(null, 401, 'Unauthorized');
         }
+
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
@@ -84,9 +82,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+
+        return $this->sendResponse(null, 200, null);
     }
   
     /**
@@ -96,6 +93,6 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return $this->sendResponse($request->user(), 200, null);
     }
 }
