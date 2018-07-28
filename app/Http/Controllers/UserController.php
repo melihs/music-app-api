@@ -28,7 +28,7 @@ class UserController extends BaseController
         }
     }
 
-   
+
     public function removeFavorite($id)
     {
         try {
@@ -68,13 +68,12 @@ class UserController extends BaseController
     public function pauseSong($song_id)
     {
         try {
-            
             $favorites = Auth::user()->favorites()
             ->where('song_id', $song_id)
             ->first()
             ->pivot
             ->update(['is_playing' => false]);
-            
+
             return $this->sendResponse($favorites, 200, null);
         } catch (\Exception $e) {
             return $this->sendResponse(null, 500, $e->getMessage());
@@ -85,8 +84,11 @@ class UserController extends BaseController
     {
         try {
             $volume = request()->has('volume') ? request()->get('volume') : 0;
-            Auth::user()->favorites()->detach($song_id);
-            $favorites = Auth::user()->favorites()->attach($song_id, ['volume' => $volume]);
+            $favorites = Auth::user()->favorites()
+            ->where('song_id', $song_id)
+            ->first()
+            ->pivot
+            ->update(['volume' => $volume]);
             return $this->sendResponse(null, 201, null);
         } catch (\Exception $e) {
             return $this->sendResponse(null, 500, $e->getMessage());
