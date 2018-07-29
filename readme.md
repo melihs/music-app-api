@@ -29,5 +29,5 @@
 - php artisan db:seed
 
 ### Tests 
-for tests, you should write command the following in project directory. I hopefully, all tests will be pass successfuly :)
+For tests, you should write command the following in project directory. I hopefully, all tests will be pass successfuly :)
 ./vendor/bin/phpunit
