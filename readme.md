@@ -10,9 +10,9 @@
 - GET  /api/favorites
 - POST /api/favorite/{song_id}/add
 - POST /api/favorite/{song_id}/remove
-- POST /api/songs/{song_id}/play
-- POST /api/songs/{song_id}/pause
-- POST /api/songs/{song_id}/volume
+- POST /api/favorite/{song_id}/play
+- POST /api/favorite/{song_id}/pause
+- POST /api/favorite/{song_id}/volume
 - GET  /api/categories
 - GET  /api/categories/:id
 - GET  /api/songs 

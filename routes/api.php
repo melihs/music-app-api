@@ -44,16 +44,16 @@ Route::group(['middleware' => ['auth:api']], function () {
     | Endpoint: /api/favorites
     | Endpoint: /api/favorite/{song_id}/add
     | Endpoint: /api/favorite/{song_id}/remove
-    | Endpoint: /api/songs/{song_id}/play
-    | Endpoint: /api/songs/{song_id}/pause
-    | Endpoint: /api/songs/{song_id}/volume
+    | Endpoint: /api/favorite/{song_id}/play
+    | Endpoint: /api/favorite/{song_id}/pause
+    | Endpoint: /api/favorite/{song_id}/volume
     */
     Route::get('favorites', 'FavoriteController@getFavorites');
     Route::post('favorite/{song_id}/add', 'FavoriteController@addFavorite');
     Route::post('favorite/{song_id}/remove', 'FavoriteController@removeFavorite');
-    Route::post('songs/{song_id}/play', 'FavoriteController@playSong');
-    Route::post('songs/{song_id}/pause', 'FavoriteController@pauseSong');
-    Route::post('songs/{song_id}/volume', 'FavoriteController@sendVolume');
+    Route::post('favorite/{song_id}/play', 'FavoriteController@playSong');
+    Route::post('favorite/{song_id}/pause', 'FavoriteController@pauseSong');
+    Route::post('favorite/{song_id}/volume', 'FavoriteController@sendVolume');
 
 
     /*
