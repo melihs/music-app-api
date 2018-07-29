@@ -30,7 +30,7 @@
 
 ### Tests 
 For tests, you should write command the following in project directory. 
-I hopefully, all tests will be pass successfuly :)
+I hopefully, all tests will be pass successfully :)
 
 ``` 
 ./vendor/bin/phpunit 
