@@ -22,8 +22,8 @@
 ### Getting Started
 
 ### Installation (Manual)
-- git clone github.com/onerciller/music-app-api    
-- cd && composer install music-app-api
+- git clone http://github.com/onerciller/music-app-api    
+- cd music-app-api && composer install 
 - php artisan migrate 
 - php artisan passport:install 
 - php artisan db:seed
