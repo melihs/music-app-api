@@ -22,11 +22,21 @@
 ### Getting Started
 
 ### Installation (Manual)
-- git clone http://github.com/onerciller/music-app-api    
-- cd music-app-api && composer install 
-- php artisan migrate 
-- php artisan passport:install 
-- php artisan db:seed
+```console
+$ git clone http://github.com/onerciller/music-app-api    
+$ cd music-app-api && composer install 
+$ php artisan migrate:fresh --seed 
+$ php artisan passport:install 
+
+```
+### Installation (Docker)
+
+```console
+$ git clone http://github.com/onerciller/music-app-api    
+$ cd music-app-api && composer install 
+$ docker-compose up 
+
+```
 
 ### Tests 
 For tests, you should write command the following in project directory. 
