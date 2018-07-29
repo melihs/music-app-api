@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
+use Laravel\Passport\Passport;
 
 class SongApiTest extends TestCase
 {
@@ -13,8 +15,14 @@ class SongApiTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testShouldGetSongs()
     {
-        $this->assertTrue(true);
+        factory(\App\Song::class)->create();
+
+        Passport::actingAs(factory(User::class)->create());
+
+        $response = $this->get('/api/songs');
+
+        $response->assertStatus(200);
     }
 }
