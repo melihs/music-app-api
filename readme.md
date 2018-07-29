@@ -27,6 +27,8 @@ $ git clone http://github.com/onerciller/music-app-api
 $ cd music-app-api && composer install 
 $ php artisan migrate:fresh --seed 
 $ php artisan passport:install 
+$ php artisan serve
+Server 8000 
 
 ```
 ### Installation (Docker)
@@ -38,6 +40,7 @@ $ docker-compose run app bash
 $ php artisan migrate:fresh --seed 
 $ php artisan passport:install
 $ docker-compose up 
+Server 8080 
 
 ```
 
