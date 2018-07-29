@@ -22,12 +22,21 @@ class UserApiTest extends TestCase
         $song= factory(\App\Song::class)->create()->first();
 
         $addFavorite = $this->post('/api/favorite/'.$song->id.'/add');
-
         $addFavorite->assertStatus(201);
 
-        $removeFavorite = $this->post('/api/favorite/'.$song->id.'/remove');
+        $volume = $this->post('/api/favorite/'.$song->id.'/volume');
+        $volume->assertStatus(201);
 
+        $play = $this->post('/api/favorite/'.$song->id.'/play');
+        $play->assertStatus(201);
+
+        $pause = $this->post('/api/favorite/'.$song->id.'/pause');
+        $pause->assertStatus(201);
+
+        $removeFavorite = $this->post('/api/favorite/'.$song->id.'/remove');
         $removeFavorite->assertStatus(201);
+
+
 
         $favorites = $this->get('/api/favorites');
 

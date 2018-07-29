@@ -87,7 +87,7 @@ class FavoriteController extends BaseController
             ->pivot
             ->update(['is_playing' => false]);
 
-            return $this->sendResponse($favorites, 200, null);
+            return $this->sendResponse($favorites, 201, null);
         } catch (\Exception $e) {
             return $this->sendResponse(null, 500, $e->getMessage());
         }
