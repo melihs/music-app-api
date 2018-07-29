@@ -35,7 +35,7 @@ class User extends Authenticatable
      */
     public function favorites()
     {
-        return $this->belongsToMany(Song::class, 'favorites', 'user_id', 'song_id')->withPivot('volume', 'is_playing');    
+        return $this->belongsToMany(Song::class, 'favorites', 'user_id', 'song_id')->withPivot('volume', 'is_playing');
     }
 
 
@@ -48,7 +48,7 @@ class User extends Authenticatable
             $this->favorites()->attach($song_id);
         }
     }
-    
+
     /**
      * removeFavorite removes the user's favorite song
      */

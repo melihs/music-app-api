@@ -10,8 +10,8 @@ class Category extends Model
         'name'
     ];
 
-
-    public function songs(){
+    public function songs()
+    {
         return $this->HasMany(Song::class);
     }
 }
