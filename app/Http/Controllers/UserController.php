@@ -29,13 +29,13 @@ class UserController extends BaseController
     }
 
 
-    public function removeFavorite($id)
+    public function removeFavorite($song_id)
     {
         try {
-            $user = Auth::user()->removeDirectory($song_id);
-            return $this->sendResponse(null, 200, null);
+            $user = Auth::user()->removeFavorite($song_id);
+            return $this->sendResponse(null, 201, null);
         } catch (\Exception $e) {
-            return $this->sendResponse(null, 200, null);
+            return $this->sendResponse(null, 500, null);
         }
     }
 

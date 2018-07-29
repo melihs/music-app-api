@@ -17,13 +17,18 @@ class CategoryApiTest extends TestCase
      */
     public function testShouldCategoriesWithToken()
     {
-        factory(\App\Category::class)->create();
-        
-        Passport::actingAs(factory(User::class)->create());        
-    
+        factory(\App\Song::class)->create();
+
+        $category = factory(\App\Category::class)->create();
+
+        Passport::actingAs(factory(User::class)->create());
+
         $response = $this->get('/api/categories');
-    
-    
+
         $response->assertStatus(200);
+
+        $categoryDetail = $this->get('/api/categories/'.$category->id);
+
+        $categoryDetail->assertStatus(200);
     }
 }
