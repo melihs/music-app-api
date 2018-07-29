@@ -22,12 +22,16 @@
 ### Getting Started
 
 ### Installation (Manual)
-- git clone github.com/onerciller/music-app-api    
-- cd && composer install music-app-api
+- git clone http://github.com/onerciller/music-app-api    
+- cd music-app-api && composer install 
 - php artisan migrate 
 - php artisan passport:install 
 - php artisan db:seed
 
 ### Tests 
-For tests, you should write command the following in project directory. I hopefully, all tests will be pass successfuly :)
-./vendor/bin/phpunit
+For tests, you should write command the following in project directory. 
+I hopefully, all tests will be pass successfuly :)
+
+``` 
+./vendor/bin/phpunit 
+```
