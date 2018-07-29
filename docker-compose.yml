@@ -20,8 +20,17 @@ services:
     links:
       - db
     environment:
-      - DB_PORT=3306
+      - APP_NAME=Laravel
+      - APP_ENV=local
+      - APP_KEY=base64:inZfyLJY7AG7gMZqHt5JgeGWnqRX2HnEie0WZ9nqV0Y=
+      - APP_DEBUG=true
+      - APP_LOG=single
+      - APP_LOG_LEVEL=debug
+      - APP_URL=http://localhost
       - DB_HOST=db
+      - DB_DATABASE=musicApp
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
   db:
     image: mysql:5.7
     environment:
