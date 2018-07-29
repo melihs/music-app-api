@@ -34,6 +34,9 @@ $ php artisan passport:install
 ```console
 $ git clone http://github.com/onerciller/music-app-api    
 $ cd music-app-api && composer install 
+$ docker-compose run app bash
+$ php artisan migrate:fresh --seed 
+$ php artisan passport:install
 $ docker-compose up 
 
 ```
