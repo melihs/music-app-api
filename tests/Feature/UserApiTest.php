@@ -24,7 +24,7 @@ class UserApiTest extends TestCase
         $addFavorite = $this->post('/api/favorite/'.$song->id.'/add');
         $addFavorite->assertStatus(201);
 
-        $volume = $this->post('/api/favorite/'.$song->id.'/volume');
+        $volume = $this->post('/api/favorite/'.$song->id.'/volume',['volume' => 20]);
         $volume->assertStatus(201);
 
         $play = $this->post('/api/favorite/'.$song->id.'/play');
